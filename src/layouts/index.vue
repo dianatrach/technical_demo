@@ -17,9 +17,9 @@ import Card from '@/components/Card.vue'
 export default {
     name: 'AppLayout',
     components: {
-        AppHeader,
+        // AppHeader,
         AppContentHome,
-        Card
+        // Card
     }
 }
 </script>

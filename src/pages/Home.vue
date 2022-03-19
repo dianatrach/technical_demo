@@ -1,78 +1,28 @@
 <template>
     <div class="home">
         <div class="centered">
-            <!-- <Card></Card> -->
-            <Card
-                v-for="card in cards"
-                :key="card.id"
-                v-bind:card_data="card"
-            />
-            <!-- <div class="card">
-                <h1>dvghbiuiukdevd</h1>
-            </div>
-            <div class="card">
-                <h1>dvghbiuiukdevd</h1>
-            </div>
-            <div class="card">
-                <h1>dvghbiuiukdevd</h1>
-            </div>
-            <div class="card">
-                <h1>dvghbiuiukdevd</h1>
-            </div>
-            <div class="card">
-                <h1>dvghbiuiukdevd</h1>
-            </div> -->
+            <div class="card" v-for="card in cards" :key="card.id">
+                <h1>{{card.title}}</h1>
+            </div>        
         </div>
     </div>
 </template>
 
 <script>
-import Card from '@/components/Card.vue'
 
 export default ({
-    setup() {
-        
-    },
-    components: {
-        Card
-        
-    },
     data(){
         return {
-            cards:[
-                {
-                    image: "C:\Workspace\project-name\src\logo.png",
-                    id: "1",
-                    text: "ngfs xn"
-                },
-                {
-                    image: "C:\Workspace\project-name\src\logo.png",
-                    id: "2",
-                    text: "ngfs xn"
-                },
-                {
-                    image: "C:\Workspace\project-name\src\logo.png",
-                    id: "3",
-                    text: "ngfs xn"
-                },
-                {
-                    image: "C:\Workspace\project-name\src\logo.png",
-                    id: "4",
-                    text: "ngfs xn"
-                },
-                {
-                    image: "C:\Workspace\project-name\src\logo.png",
-                    id: "5",
-                    text: "ngfs xn"
-                },
-                {
-                    image: "C:\Workspace\project-name\src\logo.png",
-                    id: "6",
-                    text: "ngfs xn"
-                }
-                ]
-        }
+            cards:[]
+        };
+
+    },
+    async mounted() {
+        const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=3")
+        const cards = await res.json();
+        this.cards = cards;
     }
+    
 })
 </script>
 
