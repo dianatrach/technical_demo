@@ -2,14 +2,15 @@
     <div class="home">
         <div class="centered">
             <div class="card" v-for="card in cards" :key="card.id">
-                <h1>{{card.title}}</h1>
+                <img src="https://giphy.com/gifs/hallmarkecards-cute-hallmark-shoebox-BzyTuYCmvSORqs1ABM">
+                <h1>{{card.id}}</h1>
             </div>        
         </div>
     </div>
 </template>
 
 <script>
-
+const apiKey ="wMqvSK3gHL65KRyFxTxyrNCUCJbskKtb"
 export default ({
     data(){
         return {
@@ -18,9 +19,10 @@ export default ({
 
     },
     async mounted() {
-        const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=3")
+        const res =await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=cat&limit=3&offset=0&rating=g&lang=en`)
         const cards = await res.json();
-        this.cards = cards;
+        this.cards = cards.data;
+        console.log(cards);
     }
     
 })
