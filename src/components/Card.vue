@@ -1,11 +1,10 @@
 <template>
     <div class="card">
-        <img class="gif">
         <div class="icon">
             <img class="like_icon" src="assets/like_icon.png">
-             <img class="delete_icon" src="assets/delete_icon.png">
+            <img class="delete_icon" src="assets/delete_icon.png">
         </div>
-        
+        <img v-bind:src="todo">
         
     </div>
 </template>
@@ -13,14 +12,7 @@
 <script>
 export default ({
     name: "card",
-    props: {
-        card_data: {
-            type:Object,
-            default() {
-                return {}
-            }
-        }
-    }
+    props: ['todo']
 })
 </script>
 

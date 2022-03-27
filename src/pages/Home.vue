@@ -2,34 +2,28 @@
     <div class="home">
         <div class="centered">
             <button class="button" @click=getGifs()>Search</button>
-            <div class="card" v-for="gif in gifs" :key="gif.id">
-                <img  :src="gif" >
-            </div>        
+            <Card v-for="gif in gifs" v-bind:todo="gif" v-bind:key="gif.id"></Card>
         </div>
     </div>
 </template>
 
 <script>
+import Card from '@/components/Card.vue'
 const apiKey ="wMqvSK3gHL65KRyFxTxyrNCUCJbskKtb";
 const limit = 20;
 export default ({
     name: 'Home',
+    components: {
+    Card
+  },
     data(){
         return {
-            cards:[],
             gifs: []
         };
 
     },
-    async mounted() {
-        // const res = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=cat&limit=3&offset=0&rating=g&lang=en`)
-        // const cards = await res.json();
-        // this.cards = cards.data;
-        // console.log(cards);
-    
-    },
   methods: {
-    getGifs() {
+    getGifs: function() {
     
       fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=cat&limit=${limit}&offset=0&rating=g&lang=en`)
         .then(response => {
