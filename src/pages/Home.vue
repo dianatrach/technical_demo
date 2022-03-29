@@ -7,9 +7,11 @@
     </div>
 </template>
 
-<script>
+<script lang="js">
 import Card from '@/components/Card.vue'
+import CardModel from '@/classes/CardModel.vue'
 const apiKey ="wMqvSK3gHL65KRyFxTxyrNCUCJbskKtb";
+import Vue from 'vue';
 const limit = 20;
 export default ({
     name: 'Home',
@@ -18,7 +20,7 @@ export default ({
   },
     data(){
         return {
-            gifs: []
+            gifs: [CardModel]
         };
 
     },
@@ -33,12 +35,12 @@ export default ({
           this.buildGifs(json);
         })
         .catch(err => console.log(err));
-    
     },
     buildGifs(json) {
       this.gifs = json.data.map(gif => gif.id).map(gifId => {
-        return `https://media.giphy.com/media/${gifId}/giphy.gif`;
+        return new CardModel.constructor(gifId)
       });
+      console.log(this.gifs);
     }
   }
 
