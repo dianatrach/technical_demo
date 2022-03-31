@@ -1,20 +1,21 @@
 <template>
   <div id="app">
-    <Header/>
-    
+    <MainWrapper/> 
   </div>
 </template>
 
 <script>
-import MainComponent from '@/components/MainComponent.vue'
-import Header from '@/layouts/Header.vue'
+import MainWrapper from '@/components/main-wrapper.vue';
 
 export default {
   name: 'App',
   components: {
-    MainComponent,
-    Header
-  }
+    MainWrapper
+  },
+    data() {
+      return {}
+    }
+
 }
 </script>
 

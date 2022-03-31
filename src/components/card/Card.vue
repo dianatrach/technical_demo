@@ -1,11 +1,10 @@
 <template>
     <div class="card">
-        <img class="gif">
         <div class="icon">
-            <img class="like_icon" src="assets/like_icon.png">
-             <img class="delete_icon" src="assets/delete_icon.png">
+            <img class="like_icon" src='@/assets/like_icon.png'>
+            <img class="delete_icon" src='@/assets/delete_icon.png'>
         </div>
-        
+        <img v-bind:src="todo">
         
     </div>
 </template>
@@ -13,14 +12,7 @@
 <script>
 export default ({
     name: "card",
-    props: {
-        card_data: {
-            type:Object,
-            default() {
-                return {}
-            }
-        }
-    }
+    props: ['todo']
 })
 </script>
 
@@ -33,10 +25,7 @@ export default ({
     width: 312px;
     height: 368px;
     background-color: #464646;
-}
-
-.gif {
-    z-index: 1;
+    margin: 24px 24px 0px 0px;
 }
 
 .icon {
@@ -48,6 +37,7 @@ export default ({
     height: 32px;
     background-color: #fff;
     border-radius: 2px;
+    visibility: hidden;
 }
 .like_icon {
     display: block;
