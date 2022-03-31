@@ -2,13 +2,16 @@
     <div class="header">
         <div class="menu">
             <nav class="nav">
-                <a class="nav_link home_link" href="#">home</a>
-                <a class="nav_link fav_link" href="#">favorites</a>
+                <router-link :to="{name: 'Home'}" class="nav_link fav_link">home</router-link>
+                <router-link :to="{name: 'Favorites'}" class="nav_link fav_link">favorites</router-link>
+                <!-- <a class="nav_link home_link">home</a>
+                <a class="nav_link fav_link" >favorites</a> -->
             </nav>
         </div>
         <div class="search_box">
             <div class="text-field__icon text-field__icon_search">
-                <input class="text-field__input" type="text"  placeholder="Search GIF">
+                <input class="text-field__input" type="text" placeholder="Search GIF">
+                
             </div>
         </div>
 
@@ -16,12 +19,24 @@
     </div>
 </template>
 
-<script>
+<script lang="js">
 
 
-export default {
-    name: 'Header'
-}
+export default ({
+    name: 'Header',
+    props: {},
+    data() {
+      return {}
+    },
+    mounted(){
+        document.querySelector('input').addEventListener('keydown', function(event){
+            if(event.keyCode == 13){
+                console.log(">>>>>>>enter");
+                eventbus.$emit('>>>>>msg',event.target.value);
+            }
+        })
+    }
+});
    
 </script>
 

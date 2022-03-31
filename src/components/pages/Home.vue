@@ -2,13 +2,13 @@
     <div class="home">
         <div class="centered">
             <button class="button" @click=getGifs()>Search</button>
-            <Card v-for="gif in gifs" v-bind:todo="gif" v-bind:key="gif.id"></Card>
+            <Card v-for="gif in gifs" v-bind:todo="gif.url" v-bind:key="gif.id"></Card>
         </div>
     </div>
 </template>
 
 <script lang="js">
-import Card from '@/components/Card.vue'
+import Card from '@/components/card/Card.vue'
 import CardModel from '@/classes/CardModel.vue'
 const apiKey ="wMqvSK3gHL65KRyFxTxyrNCUCJbskKtb";
 import Vue from 'vue';
@@ -54,15 +54,23 @@ export default ({
 .home {
     height: 2080px;
     background-color: #fff;
-    max-width: 1920px ;
+    width: 1920px ;
+    position: absolute;
+    left: 0px;
+    top: 104px;
 }
 
 .centered {
-    width: 1320px;
-    flex-wrap: wrap; 
-    justify-content: space-between;
-    align-items: center;
+    width:auto;
+    /* flex-wrap: wrap;  */
+    /* justify-content:right; */
+    /* align-items: center; */
     color: black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    align-content: center;
+    margin:auto;
 }
 
 .card {
@@ -73,3 +81,16 @@ export default ({
 }
 
 </style>
+// .centered {
+//     width: 1320px;
+//     flex-wrap: wrap; 
+//     justify-content: space-between;
+//     align-items: center;
+//     color: black;
+//     vertical-align: top;
+//     display: flex;
+//     flex-direction: row;
+//     flex-wrap:wrap;
+//     align-content: center;
+//     margin:auto;
+// }

@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <!-- <AppHeader></AppHeader> -->
+        <AppHeader></AppHeader>
         <Home/>
         <!-- <Card></Card> -->
 
