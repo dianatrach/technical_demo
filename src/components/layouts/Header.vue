@@ -4,13 +4,11 @@
             <nav class="nav">
                 <router-link :to="{name: 'Home'}" class="nav_link fav_link">home</router-link>
                 <router-link :to="{name: 'Favorites'}" class="nav_link fav_link">favorites</router-link>
-                <!-- <a class="nav_link home_link">home</a>
-                <a class="nav_link fav_link" >favorites</a> -->
             </nav>
         </div>
         <div class="search_box">
             <div class="text-field__icon text-field__icon_search">
-                <input class="text-field__input" type="text" placeholder="Search GIF">
+                <input class="text-field__input" type="text" placeholder="Search GIF" v-model="searchValue">
                 
             </div>
         </div>
@@ -28,11 +26,20 @@ export default ({
     data() {
       return {}
     },
+    computed: {
+        searchValue: {
+            get() {
+                return this.$store.state.searchValue;
+            },
+            set(value) {
+                this.$store.commit('SET_SEARCH_VALUE_TO_VUEX', value);
+            },
+        }
+    },
     mounted(){
         document.querySelector('input').addEventListener('keydown', function(event){
             if(event.keyCode == 13){
-                console.log(">>>>>>>enter");
-                eventbus.$emit('>>>>>msg',event.target.value);
+
             }
         })
     }
@@ -81,7 +88,7 @@ export default ({
 }
 
 .nav_link:hover {
-    text-decoration: underline; //подчеркивание при наведении
+    text-decoration: underline;
 }
 
 .menu {
