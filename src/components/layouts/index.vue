@@ -1,6 +1,9 @@
 <template>
     <div id="app">
         <AppHeader></AppHeader>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
         <Home/>
         <!-- <Card></Card> -->
 

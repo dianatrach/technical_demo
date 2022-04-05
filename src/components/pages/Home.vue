@@ -9,7 +9,7 @@
 
 <script lang="js">
 import Card from '@/components/card/Card.vue'
-import CardModel from '@/classes/CardModel.vue'
+import CardModel from '@/classes/CardModel.js'
 const apiKey ="wMqvSK3gHL65KRyFxTxyrNCUCJbskKtb";
 import Vue from 'vue';
 const limit = 20;
@@ -26,7 +26,6 @@ export default ({
     },
   methods: {
     getGifs: function() {
-    
       fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=cat&limit=${limit}&offset=0&rating=g&lang=en`)
         .then(response => {
           return response.json();
@@ -35,10 +34,11 @@ export default ({
           this.buildGifs(json);
         })
         .catch(err => console.log(err));
+    
     },
     buildGifs(json) {
       this.gifs = json.data.map(gif => gif.id).map(gifId => {
-        return new CardModel.constructor(gifId)
+        return new CardModel(gifId);
       });
       console.log(this.gifs);
     }
@@ -81,16 +81,3 @@ export default ({
 }
 
 </style>
-// .centered {
-//     width: 1320px;
-//     flex-wrap: wrap; 
-//     justify-content: space-between;
-//     align-items: center;
-//     color: black;
-//     vertical-align: top;
-//     display: flex;
-//     flex-direction: row;
-//     flex-wrap:wrap;
-//     align-content: center;
-//     margin:auto;
-// }
