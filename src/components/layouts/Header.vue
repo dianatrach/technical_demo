@@ -18,7 +18,9 @@
 </template>
 
 <script lang="js">
-
+import CardModel from '@/classes/CardModel.js'
+import CardsRequest from '@/vuex/actions/api.js'
+import store from '@/vuex/store.js'
 
 export default ({
     name: 'Header',
@@ -29,17 +31,17 @@ export default ({
     computed: {
         searchValue: {
             get() {
-                return this.$store.state.searchValue;
+                return store.state.searchValue;
             },
             set(value) {
-                this.$store.commit('SET_SEARCH_VALUE_TO_VUEX', value);
+                store.commit('SET_SEARCH_VALUE_TO_VUEX', value);
             },
         }
     },
     mounted(){
         document.querySelector('input').addEventListener('keydown', function(event){
-            if(event.keyCode == 13){
-
+            if(event.keyCode == 13){ 
+                store.dispatch('CARD_REQUEST', store.state.searchValue);
             }
         })
     }

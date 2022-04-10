@@ -7,9 +7,11 @@
     </div>
 </template>
 
-<script lang="js">
+<script>
 import Card from '@/components/card/Card.vue'
 import CardModel from '@/classes/CardModel.js'
+import store from '@/vuex/store.js'
+import CardsRequest from '@/vuex/actions/api.js'
 const apiKey ="wMqvSK3gHL65KRyFxTxyrNCUCJbskKtb";
 import Vue from 'vue';
 const limit = 20;
@@ -26,14 +28,7 @@ export default ({
     },
   methods: {
     getGifs: function() {
-      fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=cat&limit=${limit}&offset=0&rating=g&lang=en`)
-        .then(response => {
-          return response.json();
-        })
-        .then(json => {
-          this.buildGifs(json);
-        })
-        .catch(err => console.log(err));
+      this.gifs =  store.state.cards;
     
     },
     buildGifs(json) {
@@ -62,9 +57,6 @@ export default ({
 
 .centered {
     width:auto;
-    /* flex-wrap: wrap;  */
-    /* justify-content:right; */
-    /* align-items: center; */
     color: black;
     display: flex;
     flex-direction: row;

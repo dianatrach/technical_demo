@@ -1,9 +1,11 @@
-import actions from '@/vuex/actions/actions'
+import commonActions from '@/vuex/actions/actions'
 import mutations from '@/vuex/mutations/mutations'
 import getters from '@/vuex/getters/getters';
-import CardModel from '@/classes/CardModel'
+import CardModel from '@/classes/CardModel';
 import { createStore } from 'vuex'
+import apiRequests from '@/vuex/actions/api'
 
+const actions = {...commonActions,...apiRequests}
 
 let store = createStore ({
   state: {
@@ -12,7 +14,7 @@ let store = createStore ({
   },
   mutations,
   actions,
-  getters,
+  getters
 });
 
 export default store;
