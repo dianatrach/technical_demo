@@ -1,46 +1,36 @@
 <template>
     <div class="home">
         <div class="centered">
-            <button class="button" @click=getGifs()>Search</button>
             <Card v-for="gif in gifs" v-bind:todo="gif.url" v-bind:key="gif.id"></Card>
         </div>
     </div>
 </template>
 
-<script>
+<script lang='js'>
 import Card from '@/components/card/Card.vue'
 import CardModel from '@/classes/CardModel.js'
 import store from '@/vuex/store.js'
-import CardsRequest from '@/vuex/actions/api.js'
-const apiKey ="wMqvSK3gHL65KRyFxTxyrNCUCJbskKtb";
-import Vue from 'vue';
-const limit = 20;
+import emitter from '@/main.js';
 export default ({
     name: 'Home',
     components: {
     Card
   },
-    data(){
+    data() {
         return {
             gifs: [CardModel]
         };
 
     },
   methods: {
-    getGifs: function() {
-      this.gifs =  store.state.cards;
     
-    },
-    buildGifs(json) {
-      this.gifs = json.data.map(gif => gif.id).map(gifId => {
-        return new CardModel(gifId);
-      });
-      console.log(this.gifs);
-    }
+  },
+  mounted() {
+    emitter.on('search', () => {
+      this.gifs = store.state.cards
+    })
   }
 
-  
-    
 });
 </script>
 
