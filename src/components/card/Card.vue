@@ -2,9 +2,8 @@
     <div class="card">
         <div class="icon">
             <img class="like_icon" src='@/assets/like_icon.png'>
-            <img class="delete_icon" src='@/assets/delete_icon.png'>
         </div>
-        <img v-bind:src="todo">
+        <img v-lazy="todo" class="gif">
         
     </div>
 </template>
@@ -18,6 +17,11 @@ export default ({
 
 <style scoped>
 
+img.gif {
+    width: 100%;
+    max-height: 368px;
+}
+
 .card {
     position: relative;
     left: 0px;
@@ -28,27 +32,29 @@ export default ({
     margin: 24px 24px 0px 0px;
 }
 
+.gif {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
+
 .icon {
+    position: absolute;
     z-index: 2;
-    margin-right: 16px;
-    margin-top: 16px;
-    margin-left: auto;
+    right: 16px;
+    top: 16px;
     width: 40px;
     height: 32px;
     background-color: #fff;
     border-radius: 2px;
-    visibility: hidden;
 }
-.like_icon {
-    display: block;
-    margin: 0 auto;
-    
+.icon .like_icon {
+    position: relative;
+    padding: 9.25px;
 }
 
-.delete_icon {
-    display: block;
-    margin: 0 auto;
-    visibility: hidden;
-}
 
 </style>

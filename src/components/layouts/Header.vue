@@ -8,7 +8,7 @@
         </div>
         <div class="search_box">
             <div class="text-field__icon text-field__icon_search">
-                <input class="text-field__input" type="text" placeholder="Search GIF" v-model="searchValue">
+                <input class="text-field__input" type="text" placeholder="Search GIF" v-model="searchValue" @keyup.enter="pressEnter">
                 
             </div>
         </div>
@@ -28,6 +28,10 @@ export default ({
     data() {
       return {}
     },
+    created() {
+        store.commit('SET_SEARCH_VALUE_TO_VUEX', "cat");
+        store.dispatch('CARD_REQUEST', store.state.searchValue);
+    },
     computed: {
         searchValue: {
             get() {
@@ -39,12 +43,10 @@ export default ({
             },
         }
     },
-    mounted(){
-        document.querySelector('input').addEventListener('keydown', function(event){
-            if(event.keyCode == 13){ 
-                emitter.emit('search')
-            }
-        })
+    methods: {
+        pressEnter: function() {
+            emitter.emit('search');
+        }
     }
 });
    

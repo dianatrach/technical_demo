@@ -1,17 +1,19 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from '@/components/pages/Home'
-import Favorites from '@/components/pages/Favorites'
+
+function lazyLoad(view){
+  return() => import(`@/components/pages/${view}.vue`)
+}
 
 const routes = [
     {
       path: "/",
       name: "Home",
-      component: Home,
+      component: lazyLoad('Home'),
     },
     {
       path: "/favorites",
       name: "Favorites",
-      component: Favorites,
+      component: lazyLoad('Favorites'),
     },
   ];
   

@@ -18,18 +18,18 @@ export default ({
   },
     data() {
         return {
-            gifs: [CardModel]
+            gifs: []
         };
 
     },
-  methods: {
-    
-  },
-  mounted() {
+    created() {
+      this.gifs = store.state.cards;
+    },
+    mounted() {
     emitter.on('search', () => {
       this.gifs = store.state.cards
-    })
-  }
+      })
+    }
 
 });
 </script>
@@ -39,27 +39,21 @@ export default ({
 .home {
     height: 2080px;
     background-color: #fff;
-    width: 1920px ;
+    width: 1920px;
     position: absolute;
     left: 0px;
     top: 104px;
+    align-content: center;
 }
 
 .centered {
-    width:auto;
+    width: 1344px;
     color: black;
     display: flex;
     flex-direction: row;
     flex-wrap:wrap;
     align-content: center;
     margin:auto;
-}
-
-.card {
-    max-width: 312px;
-    max-height: 368px;
-    padding: 24px;
-    box-shadow: 0 0 8px #666;
 }
 
 </style>

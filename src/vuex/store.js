@@ -10,7 +10,8 @@ const actions = {...commonActions,...apiRequests}
 let store = createStore ({
   state: {
     searchValue: '',
-    cards: [CardModel]
+    cards: [CardModel],
+    offset: 0
   },
   mutations,
   actions,
