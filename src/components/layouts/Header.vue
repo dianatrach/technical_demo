@@ -28,10 +28,6 @@ export default ({
     data() {
       return {}
     },
-    created() {
-        store.commit('SET_SEARCH_VALUE_TO_VUEX', "cat");
-        store.dispatch('CARD_REQUEST', store.state.searchValue);
-    },
     computed: {
         searchValue: {
             get() {

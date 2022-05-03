@@ -10,6 +10,6 @@ export default{
           const cards = json.data.map(gif => gif.id).map(gifId => {
               return new CardModel(gifId)
           });
-          state.cards = cards
+          state.cards = cards;
   }
 }

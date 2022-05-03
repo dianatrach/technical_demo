@@ -8,7 +8,7 @@
 
 <script>
   import Header from '@/components/layouts/Header.vue'
-
+  import store from '@/vuex/store.js'
   export default {
     name: 'main-wrapper',
     components: {
@@ -18,7 +18,10 @@
     data() {
       return {}
     },
-    computed: {}
+    computed: {},
+    created() {
+        store.dispatch('CARD_REQUEST', "cat");
+    },
   }
 </script>
 
