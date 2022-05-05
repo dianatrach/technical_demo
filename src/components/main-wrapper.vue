@@ -19,9 +19,6 @@
       return {}
     },
     computed: {},
-    created() {
-        store.dispatch('CARD_REQUEST', "cat");
-    },
   }
 </script>
 

@@ -21,7 +21,8 @@ export default ({
             gifs: []
         };
     },
-    created() {
+    async created() {
+      await store.dispatch('CARD_REQUEST', store.state.searchValue);
       this.gifs = store.state.cards;
       window.addEventListener("scroll", this.handleScroll);
     },
@@ -35,19 +36,16 @@ export default ({
         let bottomOfWindow = this.$refs.home.clientHeight - summaryScrolled <= 50;
         if (bottomOfWindow) {
           store.state.offset+=20;
-          if(store.state.searchValue==""){
-            store.state.searchValue="cat"
-          }
-          store.dispatch('CARD_REQUEST', store.state.searchValue);
+          await store.dispatch('CARD_REQUEST', store.state.searchValue);
           this.gifs = this.gifs.concat(store.state.cards);
-          console.log("<<<<<<<<")
         }
       }
     },
     mounted() {
-      emitter.on('search', () => {
+      emitter.on('search', async () => {
+      await store.dispatch('CARD_REQUEST', store.state.searchValue);
       this.gifs = store.state.cards
-      })   
+      })     
     }
 });
 </script>

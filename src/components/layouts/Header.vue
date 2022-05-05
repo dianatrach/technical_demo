@@ -35,7 +35,6 @@ export default ({
             },
             set(value) {
                 store.commit('SET_SEARCH_VALUE_TO_VUEX', value);
-                store.dispatch('CARD_REQUEST', store.state.searchValue);
             },
         }
     },
