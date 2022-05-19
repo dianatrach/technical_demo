@@ -1,17 +1,24 @@
 <template>
-    <div class="card">
-        <div class="icon">
-            <img class="like_icon" src='@/assets/like_icon.png'>
-        </div>
+    <div class="card" @mouseover="hover = true"
+        @mouseleave="hover = false">
+        <EditFavorites class="icon" v-if="hover" v-bind:index="index"/>
         <img v-lazy="todo" class="gif">
-        
     </div>
 </template>
 
 <script>
+import EditFavorites from '@/components/card/EditFavorites.vue'
 export default ({
     name: "card",
-    props: ['todo']
+    components: {
+        EditFavorites
+    },
+    data() {
+        return {
+            hover: false
+        };
+    },
+    props: ['todo', 'index']
 })
 </script>
 
@@ -40,21 +47,5 @@ img.gif {
     left: 0px;
     top: 0px;
 }
-
-.icon {
-    position: absolute;
-    z-index: 2;
-    right: 16px;
-    top: 16px;
-    width: 40px;
-    height: 32px;
-    background-color: #fff;
-    border-radius: 2px;
-}
-.icon .like_icon {
-    position: relative;
-    padding: 9.25px;
-}
-
 
 </style>

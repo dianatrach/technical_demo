@@ -18,7 +18,6 @@
 </template>
 
 <script lang='js' >
-import CardModel from '@/classes/CardModel.js'
 import store from '@/vuex/store.js'
 import emitter from '@/main.js';
 
