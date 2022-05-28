@@ -1,7 +1,7 @@
 <template>
     <div class="home" id="home" ref="home">
         <div class="centered">
-            <Card v-for="(gif,index) in gifs" v-bind:todo="gif.url" v-bind:key="gif.id" v-bind:index="index"></Card>
+            <Card v-for="gif in gifs" v-bind:todo="gif.url" v-bind:key="gif.id" v-bind:id="gif.id"></Card>
         </div>
     </div>
 </template>

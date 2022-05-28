@@ -1,24 +1,24 @@
 <template>
     <div class="card" @mouseover="hover = true"
         @mouseleave="hover = false">
-        <EditFavorites class="icon" v-if="hover" v-bind:index="index"/>
+        <FavoriteButton class="icon" v-if="hover" v-bind:id="id"/>
         <img v-lazy="todo" class="gif">
     </div>
 </template>
 
 <script>
-import EditFavorites from '@/components/card/EditFavorites.vue'
+import FavoriteButton from '@/components/card/FavoriteButton.vue'
 export default ({
     name: "card",
     components: {
-        EditFavorites
+        FavoriteButton
     },
     data() {
         return {
             hover: false
         };
     },
-    props: ['todo', 'index']
+    props: ['todo', 'id']
 })
 </script>
 

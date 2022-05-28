@@ -17,7 +17,15 @@ export default{
         state.cards = cards;
       }
     },
-    EDIT_FAVORITE: (state, index) => {
+    ADD_TO_CARDS: (state, cards) => {
+      if(state.cards!=null){
+        state.cards = state.cards.concat(cards);
+      }
+      else {
+        state.cards = cards;
+      }
+    },
+    TOGGLE_FAVORITE: (state, index) => {
       state.cards[index].isFavourite = !state.cards[index].isFavourite;
     },
     CLEAR_CARDS: (state) => {
