@@ -1,96 +1,56 @@
 <template>
-    <div class="home">
+    <div class="home" id="home" ref="home">
         <div class="centered">
-            <button class="button" @click=getGifs()>Search</button>
-            <Card v-for="gif in gifs" v-bind:todo="gif.url" v-bind:key="gif.id"></Card>
+            <Card v-for="gif in gifs" v-bind:todo="gif.url" v-bind:key="gif.id" v-bind:id="gif.id"></Card>
         </div>
     </div>
 </template>
 
-<script lang="js">
-import Card from '@/components/card/Card.vue'
-import CardModel from '@/classes/CardModel.vue'
-const apiKey ="wMqvSK3gHL65KRyFxTxyrNCUCJbskKtb";
-import Vue from 'vue';
-const limit = 20;
+<script lang='js'>
+import Card from '@/components/card/Card.vue';
+import store from '@/vuex/store.js';
+import emitter from '@/main.js';
+
 export default ({
-    name: 'Home',
-    components: {
+  name: 'Home',
+  components: {
     Card
   },
-    data(){
-        return {
-            gifs: [CardModel]
-        };
-
-    },
+  data() {
+    return {
+      gifs: []
+    };
+  },
+  async created() {
+    await store.dispatch('CARD_REQUEST', store.state.searchValue);
+    store.dispatch('SET_CARDS_FROM_COOKIES', this.$cookies);
+    this.gifs = store.state.cards;
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
-    getGifs: function() {
-    
-      fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=cat&limit=${limit}&offset=0&rating=g&lang=en`)
-        .then(response => {
-          return response.json();
-        })
-        .then(json => {
-          this.buildGifs(json);
-        })
-        .catch(err => console.log(err));
+    handleScroll(event) {
+      const elmnt = document.getElementById("home");
+      let summaryScrolled = document.documentElement.scrollTop + window.innerHeight;
+      let bottomOfWindow = this.$refs.home.clientHeight - summaryScrolled <= 50;
+      if (bottomOfWindow) {
+        this.createCard();
+      };
     },
-    buildGifs(json) {
-      this.gifs = json.data.map(gif => gif.id).map(gifId => {
-        return new CardModel.constructor(gifId)
-      });
-      console.log(this.gifs);
-    }
+    async createCard() {
+      store.state.offset+=20;
+      await store.dispatch('CARD_REQUEST', store.state.searchValue);
+      this.gifs = store.state.cards;
+    } 
+  },
+  mounted() {
+    emitter.on('search', async () => {
+    store.commit('CLEAR_CARDS');
+    await store.dispatch('CARD_REQUEST', store.state.searchValue);
+    this.gifs = store.state.cards;
+    });   
   }
-
-  
-    
 });
 </script>
-
-
-<style scoped>
-.home {
-    height: 2080px;
-    background-color: #fff;
-    width: 1920px ;
-    position: absolute;
-    left: 0px;
-    top: 104px;
-}
-
-.centered {
-    width:auto;
-    /* flex-wrap: wrap;  */
-    /* justify-content:right; */
-    /* align-items: center; */
-    color: black;
-    display: flex;
-    flex-direction: row;
-    flex-wrap:wrap;
-    align-content: center;
-    margin:auto;
-}
-
-.card {
-    max-width: 312px;
-    max-height: 368px;
-    padding: 24px;
-    box-shadow: 0 0 8px #666;
-}
-
-</style>
-// .centered {
-//     width: 1320px;
-//     flex-wrap: wrap; 
-//     justify-content: space-between;
-//     align-items: center;
-//     color: black;
-//     vertical-align: top;
-//     display: flex;
-//     flex-direction: row;
-//     flex-wrap:wrap;
-//     align-content: center;
-//     margin:auto;
-// }
