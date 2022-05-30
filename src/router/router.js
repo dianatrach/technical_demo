@@ -8,12 +8,12 @@ const routes = [
     {
       path: "/",
       name: "Home",
-      component: lazyLoad('Home'),
+      component: lazyLoad('Home')
     },
     {
       path: "/favorites",
       name: "Favorites",
-      component: lazyLoad('Favorites'),
+      component: lazyLoad('Favorites')
     },
   ];
   
